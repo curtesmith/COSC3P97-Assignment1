@@ -4,13 +4,27 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
-public class CalculatorActivity extends Activity {
+import java.util.Observable;
+import java.util.Observer;
+
+public class CalculatorActivity extends Activity implements Observer, View.OnClickListener {
+
+    private CalculatorModel calculatorModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculator);
+
+        calculatorModel = new CalculatorModel();
+        calculatorModel.addObserver(this);
+
+        Button button = (Button) this.findViewById(R.id.button1);
+        button.setOnClickListener(this);
     }
 
     @Override
@@ -33,5 +47,18 @@ public class CalculatorActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void update(Observable observable, Object data) {
+        TextView display = (TextView) this.findViewById(R.id.display);
+        display.setText(calculatorModel.getDisplay());
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        Button button = (Button) v;
+        calculatorModel.appendToDisplay(button.getText().toString());
     }
 }
