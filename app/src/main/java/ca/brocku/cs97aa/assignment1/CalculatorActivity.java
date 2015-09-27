@@ -27,6 +27,8 @@ public class CalculatorActivity extends Activity implements Observer, View.OnCli
         button.setOnClickListener(this);
         Button clear = (Button) this.findViewById(R.id.clear_button);
         clear.setOnClickListener(this);
+        Button plus = (Button) this.findViewById(R.id.addition_button);
+        plus.setOnClickListener(this);
     }
 
     @Override
@@ -65,6 +67,9 @@ public class CalculatorActivity extends Activity implements Observer, View.OnCli
         switch (button.getId()) {
             case R.id.clear_button:
                 calculatorModel.clearDisplay();
+                break;
+            case R.id.addition_button:
+                calculatorModel.addition();
                 break;
             default:
                 calculatorModel.appendToDisplay(button.getText().toString());
