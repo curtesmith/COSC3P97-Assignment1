@@ -2,9 +2,7 @@ package ca.brocku.cs97aa.assignment1;
 
 import java.util.Observable;
 
-/**
- * Created by Curtis on 2015-09-26.
- */
+
 public class CalculatorModel extends Observable {
 
     private String _display = "0";
@@ -54,6 +52,9 @@ public class CalculatorModel extends Observable {
 
     public void calculate() {
         Number result;
+
+        if(_operation == null)
+            return;
 
         if (_operand == null) {
             result = Integer.valueOf(getDisplay());
