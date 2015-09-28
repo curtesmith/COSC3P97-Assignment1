@@ -3,6 +3,9 @@
 
     <string name="clear">Clear</string>
     <string name="addition">+</string>
+    <string name="subtraction">-</string>
+    <string name="multiplication">*</string>
+    <string name="division">/</string>
     <string name="equals">=</string>
     <string name="action_settings">Settings</string>
 </resources>
