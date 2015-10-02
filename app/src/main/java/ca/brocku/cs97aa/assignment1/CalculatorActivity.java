@@ -68,7 +68,7 @@ public class CalculatorActivity extends Activity implements Observer, View.OnCli
 
         switch (button.getId()) {
             case R.id.clear_button:
-                calculatorModel.clearDisplay();
+                calculatorModel.clear();
                 break;
             case R.id.addition_button:
                 calculatorModel.addition();

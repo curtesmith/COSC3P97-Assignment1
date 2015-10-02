@@ -4,9 +4,7 @@ import junit.framework.TestCase;
 
 import ca.brocku.cs97aa.assignment1.CalculatorModel;
 
-/**
- * Created by Curtis on 2015-09-26.
- */
+
 public class CalculatorModelTest extends TestCase {
     private CalculatorModel calculatorModel;
 
@@ -18,10 +16,8 @@ public class CalculatorModelTest extends TestCase {
         calculatorModel = new CalculatorModel();
     }
 
-    public void testSetDisplay() {
-        String expected = "some value";
-        calculatorModel.setDisplay(expected);
-        assertEquals("something happened with the setDisplay", expected, calculatorModel.getDisplay());
+    public void testGetDisplay() {
+        assertEquals("the display should equal zero", "0", calculatorModel.getDisplay());
     }
 
     public void testAppendToDisplay() {
@@ -29,13 +25,30 @@ public class CalculatorModelTest extends TestCase {
         assertEquals("something happened with the appendToDisplay", "5", calculatorModel.getDisplay());
     }
 
-    public void testClearDisplay() {
-        calculatorModel.setDisplay("12345");
-        calculatorModel.clearDisplay();
+    public void testClear() {
+        calculatorModel.appendToDisplay("12345");
+        calculatorModel.clear();
         assertEquals("it didn't clear", "0", calculatorModel.getDisplay());
     }
 
     public void testAddition() {
+        calculatorModel.appendToDisplay("12");
+        calculatorModel.addition();
+        calculatorModel.appendToDisplay("13");
+        calculatorModel.calculate();
+        assertEquals("12 + 13 should equal 25", "25", calculatorModel.getDisplay());
+    }
 
+    public void testCalculateWithNoOperation() {
+        calculatorModel.appendToDisplay("22");
+        calculatorModel.calculate();
+        assertEquals("the display should still be 22", "22", calculatorModel.getDisplay());
+    }
+
+    public void testCalculateWithOneOperand() {
+        calculatorModel.appendToDisplay("23");
+        calculatorModel.addition();
+        calculatorModel.calculate();
+        assertEquals("the display should still be 46", "46", calculatorModel.getDisplay());
     }
 }

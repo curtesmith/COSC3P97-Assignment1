@@ -12,11 +12,6 @@ public class CalculatorModel extends Observable {
 
     public CalculatorModel() { }
 
-    public void setDisplay(String text) {
-        _display = text;
-        setChanged();
-        notifyObservers();
-    }
 
     public void appendToDisplay(String text) {
         if (_appendMode) {
@@ -27,16 +22,26 @@ public class CalculatorModel extends Observable {
         }
     }
 
+
+    private void setDisplay(String text) {
+        _display = text;
+        setChanged();
+        notifyObservers();
+    }
+
+
     public String getDisplay() {
         return _display;
     }
 
-    public void clearDisplay() {
+
+    public void clear() {
         _appendMode = false;
         _operand = null;
         _operation = null;
         setDisplay("0");
     }
+
 
     public void addition() {
         setOperation(new Addition());
@@ -49,6 +54,7 @@ public class CalculatorModel extends Observable {
         _operation = operation;
         _appendMode = false;
     }
+
 
     public void calculate() {
         Number result;
