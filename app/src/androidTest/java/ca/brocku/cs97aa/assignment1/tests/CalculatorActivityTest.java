@@ -8,9 +8,7 @@ import android.widget.TextView;
 import ca.brocku.cs97aa.assignment1.CalculatorActivity;
 import ca.brocku.cs97aa.assignment1.R;
 
-/**
- * Created by Curtis on 2015-09-26.
- */
+
 public class CalculatorActivityTest extends ActivityInstrumentationTestCase2<CalculatorActivity> {
     CalculatorActivity activity;
 
@@ -37,13 +35,60 @@ public class CalculatorActivityTest extends ActivityInstrumentationTestCase2<Cal
 
 
     public void testClickButton1ShouldAppendToDisplay() {
+        assertEquals("it did not equal 1", "1", clickNumberButtonHelper(R.id.button1));
+    }
 
-        Button one = (Button) activity.findViewById(R.id.button1);
-        TouchUtils.clickView(this, one);
 
+    public void testClickButton2ShouldAppendToDisplay() {
+        assertEquals("it did not equal 2", "2", clickNumberButtonHelper(R.id.button2));
+    }
+
+
+    public void testClickButton3ShouldAppendToDisplay() {
+        assertEquals("it did not equal 3", "3", clickNumberButtonHelper(R.id.button3));
+    }
+
+
+    public void testClickButton4ShouldAppendToDisplay() {
+        assertEquals("it did not equal 4", "4", clickNumberButtonHelper(R.id.button4));
+    }
+
+
+    public void testClickButton5ShouldAppendToDisplay() {
+        assertEquals("it did not equal 5", "5", clickNumberButtonHelper(R.id.button5));
+    }
+
+
+    public void testClickButton6ShouldAppendToDisplay() {
+        assertEquals("it did not equal 6", "6", clickNumberButtonHelper(R.id.button6));
+    }
+
+
+    public void testClickButton7ShouldAppendToDisplay() {
+        assertEquals("it did not equal 7", "7", clickNumberButtonHelper(R.id.button7));
+    }
+
+
+    public void testClickButton8ShouldAppendToDisplay() {
+        assertEquals("it did not equal 8", "8", clickNumberButtonHelper(R.id.button8));
+    }
+
+
+    public void testClickButton9ShouldAppendToDisplay() {
+        assertEquals("it did not equal 9", "9", clickNumberButtonHelper(R.id.button9));
+    }
+
+    public void testClickButton0ShouldAppendToDisplay() {
+        String display = clickNumberButtonHelper(R.id.button1);
+        assertEquals("it did not equal 10", "10", clickNumberButtonHelper(R.id.button0));
+    }
+
+
+    private String clickNumberButtonHelper(int id) {
+        Button button = (Button) activity.findViewById(id);
+        TouchUtils.clickView(this, button);
         TextView display = (TextView) activity.findViewById(R.id.display);
-        String actualText = display.getText().toString();
-        assertEquals("1", actualText);
+        return display.getText().toString();
     }
 
     public void testClickClearButtonShouldClearTheDisplay() {
@@ -66,7 +111,7 @@ public class CalculatorActivityTest extends ActivityInstrumentationTestCase2<Cal
 
     public void testClickEqualsButton() {
         clickAdditionButton();
-        TouchUtils.clickView(this, (Button) activity.findViewById(R.id.equals_button));
+        TouchUtils.clickView(this, activity.findViewById(R.id.equals_button));
         assertEquals("12", ((TextView) activity.findViewById(R.id.display)).getText().toString());
     }
 

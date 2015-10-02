@@ -51,4 +51,5 @@ public class CalculatorModelTest extends TestCase {
         calculatorModel.calculate();
         assertEquals("the display should still be 46", "46", calculatorModel.getDisplay());
     }
+
 }

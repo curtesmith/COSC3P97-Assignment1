@@ -23,14 +23,25 @@ public class CalculatorActivity extends Activity implements Observer, View.OnCli
         calculatorModel = new CalculatorModel();
         calculatorModel.addObserver(this);
 
-        Button button = (Button) this.findViewById(R.id.button1);
+        setButtonListener(R.id.button0);
+        setButtonListener(R.id.button1);
+        setButtonListener(R.id.button2);
+        setButtonListener(R.id.button3);
+        setButtonListener(R.id.button4);
+        setButtonListener(R.id.button5);
+        setButtonListener(R.id.button6);
+        setButtonListener(R.id.button7);
+        setButtonListener(R.id.button8);
+        setButtonListener(R.id.button9);
+        setButtonListener(R.id.clear_button);
+        setButtonListener(R.id.addition_button);
+        setButtonListener(R.id.equals_button);
+    }
+
+
+    private void setButtonListener(int id) {
+        Button button = (Button) this.findViewById(id);
         button.setOnClickListener(this);
-        Button clear = (Button) this.findViewById(R.id.clear_button);
-        clear.setOnClickListener(this);
-        Button plus = (Button) this.findViewById(R.id.addition_button);
-        plus.setOnClickListener(this);
-        Button equals = (Button) this.findViewById(R.id.equals_button);
-        equals.setOnClickListener(this);
     }
 
     @Override
