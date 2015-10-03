@@ -52,6 +52,14 @@ public class CalculatorModelTest extends TestCase {
         assertEquals("the display should still be 46", "46", calculatorModel.getDisplay());
     }
 
+    public void testAdditionWithDouble() {
+        calculatorModel.appendToDisplay("1.5");
+        calculatorModel.addition();
+        calculatorModel.appendToDisplay("2");
+        calculatorModel.calculate();
+        assertEquals("the display did not have 3.5", "3.5", calculatorModel.getDisplay());
+    }
+
     @Override
     protected void tearDown() throws Exception {
         super.tearDown();

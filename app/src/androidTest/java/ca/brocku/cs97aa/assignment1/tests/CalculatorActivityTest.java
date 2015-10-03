@@ -124,6 +124,10 @@ public class CalculatorActivityTest extends ActivityInstrumentationTestCase2<Cal
         TouchUtils.clickView(this, one);
     }
 
+    private void clickAdditionWithDecimal() {
+
+    }
+
 
     @Override
     protected void tearDown() throws Exception {

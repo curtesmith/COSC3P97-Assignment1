@@ -13,6 +13,22 @@ public class CalculatorModel extends Observable {
     public CalculatorModel() { }
 
 
+    private void setOperand(String display) {
+        Double number = Double.valueOf(display);
+
+        if (number % 1 == 0) {
+            _operand = number.intValue();
+        } else {
+            _operand = number;
+        }
+    }
+
+
+    public Number getOperand() {
+        return _operand;
+    }
+
+
     public void appendToDisplay(String text) {
         if (_appendMode) {
             setDisplay(getDisplay() + text);
@@ -50,7 +66,7 @@ public class CalculatorModel extends Observable {
 
     private void setOperation(Operation operation) {
         calculate();
-        _operand = Integer.valueOf(getDisplay());
+        setOperand(getDisplay());
         _operation = operation;
         _appendMode = false;
     }
@@ -63,13 +79,17 @@ public class CalculatorModel extends Observable {
             return;
 
         if (_operand == null) {
-            result = Integer.valueOf(getDisplay());
+            setOperand(getDisplay());
+            result = getOperand();
         } else {
-            result = _operation.calculate(_operand, Integer.valueOf(getDisplay()));
+            Number savedOperand = getOperand();
+            setOperand(getDisplay());
+
+            result = _operation.calculate(savedOperand, getOperand());
         }
 
         _appendMode = false;
-        _operand = result;
+        setOperand(result.toString());
         setDisplay(result.toString());
     }
 }
