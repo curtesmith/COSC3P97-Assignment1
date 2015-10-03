@@ -23,24 +23,24 @@ public class CalculatorActivity extends Activity implements Observer, View.OnCli
         calculatorModel = new CalculatorModel();
         calculatorModel.addObserver(this);
 
-        setButtonListener(R.id.button0);
-        setButtonListener(R.id.button1);
-        setButtonListener(R.id.button2);
-        setButtonListener(R.id.button3);
-        setButtonListener(R.id.button4);
-        setButtonListener(R.id.button5);
-        setButtonListener(R.id.button6);
-        setButtonListener(R.id.button7);
-        setButtonListener(R.id.button8);
-        setButtonListener(R.id.button9);
-        setButtonListener(R.id.clear_button);
-        setButtonListener(R.id.addition_button);
-        setButtonListener(R.id.equals_button);
+        setOnClickButtonListener(R.id.button0);
+        setOnClickButtonListener(R.id.button1);
+        setOnClickButtonListener(R.id.button2);
+        setOnClickButtonListener(R.id.button3);
+        setOnClickButtonListener(R.id.button4);
+        setOnClickButtonListener(R.id.button5);
+        setOnClickButtonListener(R.id.button6);
+        setOnClickButtonListener(R.id.button7);
+        setOnClickButtonListener(R.id.button8);
+        setOnClickButtonListener(R.id.button9);
+        setOnClickButtonListener(R.id.clear_button);
+        setOnClickButtonListener(R.id.addition_button);
+        setOnClickButtonListener(R.id.equals_button);
     }
 
 
-    private void setButtonListener(int id) {
-        Button button = (Button) this.findViewById(id);
+    private void setOnClickButtonListener(int buttonId) {
+        Button button = (Button) this.findViewById(buttonId);
         button.setOnClickListener(this);
     }
 
@@ -92,4 +92,5 @@ public class CalculatorActivity extends Activity implements Observer, View.OnCli
                 break;
         }
     }
+
 }

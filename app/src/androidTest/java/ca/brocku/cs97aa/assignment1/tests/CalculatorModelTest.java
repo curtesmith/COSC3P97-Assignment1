@@ -52,4 +52,8 @@ public class CalculatorModelTest extends TestCase {
         assertEquals("the display should still be 46", "46", calculatorModel.getDisplay());
     }
 
+    @Override
+    protected void tearDown() throws Exception {
+        super.tearDown();
+    }
 }
