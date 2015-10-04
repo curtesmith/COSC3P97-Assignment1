@@ -83,6 +83,10 @@ public class CalculatorActivityTest extends ActivityInstrumentationTestCase2<Cal
         assertEquals("it did not equal 10", "10", clickNumberButtonHelper(R.id.button0));
     }
 
+    public void testClickButtonDecimalShouldAppendToDisplay() {
+        assertEquals("it did not equal .", ".", clickNumberButtonHelper(R.id.buttonDecimal));
+    }
+
 
     private String clickNumberButtonHelper(int id) {
         Button button = (Button) activity.findViewById(id);

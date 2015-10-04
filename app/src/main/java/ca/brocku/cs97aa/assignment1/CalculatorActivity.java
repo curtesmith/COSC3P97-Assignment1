@@ -33,6 +33,7 @@ public class CalculatorActivity extends Activity implements Observer, View.OnCli
         setOnClickButtonListener(R.id.button7);
         setOnClickButtonListener(R.id.button8);
         setOnClickButtonListener(R.id.button9);
+        setOnClickButtonListener(R.id.buttonDecimal);
         setOnClickButtonListener(R.id.clear_button);
         setOnClickButtonListener(R.id.addition_button);
         setOnClickButtonListener(R.id.equals_button);
