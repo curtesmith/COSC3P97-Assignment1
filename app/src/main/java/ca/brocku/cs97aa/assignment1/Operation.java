@@ -1,8 +1,14 @@
 package ca.brocku.cs97aa.assignment1;
 
-/**
- * Created by Curtis on 2015-09-26.
- */
+
 public abstract class Operation {
-    public abstract Number calculate(Number operator1, Number operator2);
+    public abstract Number run(Number operator1, Number operator2);
+
+    protected Number format(Double number) {
+        if (number % 1 == 0) {
+            return number.intValue();
+        } else {
+            return number;
+        }
+    }
 }

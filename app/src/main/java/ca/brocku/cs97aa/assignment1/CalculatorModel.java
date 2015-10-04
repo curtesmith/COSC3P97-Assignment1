@@ -85,7 +85,7 @@ public class CalculatorModel extends Observable {
             Number savedOperand = getOperand();
             setOperand(getDisplay());
 
-            result = _operation.calculate(savedOperand, getOperand());
+            result = _operation.run(savedOperand, getOperand());
         }
 
         _appendMode = false;
