@@ -38,6 +38,7 @@ public class CalculatorActivity extends Activity implements Observer, View.OnCli
         setOnClickButtonListener(R.id.addition_button);
         setOnClickButtonListener(R.id.subtraction_button);
         setOnClickButtonListener(R.id.multiplication_button);
+        setOnClickButtonListener(R.id.division_button);
         setOnClickButtonListener(R.id.equals_button);
     }
 
@@ -92,6 +93,9 @@ public class CalculatorActivity extends Activity implements Observer, View.OnCli
                 break;
             case R.id.multiplication_button:
                 calculatorModel.multiplication();
+                break;
+            case R.id.division_button:
+                calculatorModel.division();
                 break;
             case R.id.equals_button:
                 calculatorModel.calculate();

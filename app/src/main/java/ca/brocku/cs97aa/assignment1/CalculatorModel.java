@@ -16,11 +16,16 @@ public class CalculatorModel extends Observable {
     private void setOperand(String display) {
         Double number = Double.valueOf(display);
 
-        if (number % 1 == 0) {
+        if (isAnInteger(number)) {
             _operand = number.intValue();
         } else {
             _operand = number;
         }
+    }
+
+
+    private boolean isAnInteger(Double number) {
+        return number % 1 == 0;
     }
 
 

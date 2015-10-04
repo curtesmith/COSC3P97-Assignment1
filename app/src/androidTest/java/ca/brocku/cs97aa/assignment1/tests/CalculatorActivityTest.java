@@ -144,6 +144,14 @@ public class CalculatorActivityTest extends ActivityInstrumentationTestCase2<Cal
         assertEquals("3 times 4 should display 12", "12", helper.readText(R.id.display));
     }
 
+    public void testClickDivisionButton() {
+        helper.clickButton(R.id.button1, 2);
+        helper.clickButton(R.id.division_button);
+        helper.clickButton(R.id.button4);
+        helper.clickButton(R.id.equals_button);
+        assertEquals("11 divided by 4 should display 2.75", "2.75", helper.readText(R.id.display));
+    }
+
     @Override
     protected void tearDown() throws Exception {
         super.tearDown();
