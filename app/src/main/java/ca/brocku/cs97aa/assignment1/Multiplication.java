@@ -3,6 +3,8 @@ package ca.brocku.cs97aa.assignment1;
 
 public class Multiplication extends Operation {
 
+    public Multiplication() {}
+
 
     @Override
     public Number run(Number operator1, Number operator2) {
