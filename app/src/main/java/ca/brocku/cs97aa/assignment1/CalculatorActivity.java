@@ -86,6 +86,9 @@ public class CalculatorActivity extends Activity implements Observer, View.OnCli
             case R.id.addition_button:
                 calculatorModel.addition();
                 break;
+            case R.id.subtraction_button:
+                calculatorModel.subtraction();
+                break;
             case R.id.equals_button:
                 calculatorModel.calculate();
                 break;

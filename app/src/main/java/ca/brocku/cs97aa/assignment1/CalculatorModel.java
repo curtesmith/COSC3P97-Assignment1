@@ -64,6 +64,9 @@ public class CalculatorModel extends Observable {
     }
 
 
+    public void subtraction() { setOperation(new Subtraction()); }
+
+
     private void setOperation(Operation operation) {
         calculate();
         setOperand(getDisplay());

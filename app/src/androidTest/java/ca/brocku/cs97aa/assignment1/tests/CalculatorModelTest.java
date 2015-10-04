@@ -39,6 +39,14 @@ public class CalculatorModelTest extends TestCase {
         assertEquals("12 + 13 should equal 25", "25", calculatorModel.getDisplay());
     }
 
+    public void testSubtraction() {
+        calculatorModel.appendToDisplay("3");
+        calculatorModel.subtraction();
+        calculatorModel.appendToDisplay("1");
+        calculatorModel.calculate();
+        assertEquals("3 minus 1 should equal 2", "2", calculatorModel.getDisplay());
+    }
+
     public void testCalculateWithNoOperation() {
         calculatorModel.appendToDisplay("22");
         calculatorModel.calculate();

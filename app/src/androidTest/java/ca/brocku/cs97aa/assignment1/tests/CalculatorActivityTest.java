@@ -1,8 +1,6 @@
 package ca.brocku.cs97aa.assignment1.tests;
 
 import android.test.ActivityInstrumentationTestCase2;
-import android.test.TouchUtils;
-import android.widget.Button;
 import android.widget.TextView;
 
 import ca.brocku.cs97aa.assignment1.CalculatorActivity;
@@ -11,6 +9,7 @@ import ca.brocku.cs97aa.assignment1.R;
 
 public class CalculatorActivityTest extends ActivityInstrumentationTestCase2<CalculatorActivity> {
     CalculatorActivity activity;
+    ActivityHelper helper;
 
     public CalculatorActivityTest() {
         super(CalculatorActivity.class);
@@ -20,6 +19,7 @@ public class CalculatorActivityTest extends ActivityInstrumentationTestCase2<Cal
     protected void setUp() throws Exception {
         super.setUp();
         activity = getActivity();
+        helper = new ActivityHelper(activity, this);
     }
 
     public void testDisplayIsThere() {
@@ -28,110 +28,105 @@ public class CalculatorActivityTest extends ActivityInstrumentationTestCase2<Cal
     }
 
 
-    public void testButtonIsThere() {
-        Button button = (Button) activity.findViewById(R.id.button1);
-        assertNotNull("there is no button for some reason", button);
-    }
-
-
     public void testClickButton1ShouldAppendToDisplay() {
-        assertEquals("it did not equal 1", "1", clickNumberButtonHelper(R.id.button1));
+        assertEquals("it did not equal 1", "1", clickButtonAndReadDisplay(R.id.button1));
     }
 
 
     public void testClickButton2ShouldAppendToDisplay() {
-        assertEquals("it did not equal 2", "2", clickNumberButtonHelper(R.id.button2));
+        assertEquals("it did not equal 2", "2", clickButtonAndReadDisplay(R.id.button2));
     }
 
 
     public void testClickButton3ShouldAppendToDisplay() {
-        assertEquals("it did not equal 3", "3", clickNumberButtonHelper(R.id.button3));
+        assertEquals("it did not equal 3", "3", clickButtonAndReadDisplay(R.id.button3));
     }
 
 
     public void testClickButton4ShouldAppendToDisplay() {
-        assertEquals("it did not equal 4", "4", clickNumberButtonHelper(R.id.button4));
+        assertEquals("it did not equal 4", "4", clickButtonAndReadDisplay(R.id.button4));
     }
 
 
     public void testClickButton5ShouldAppendToDisplay() {
-        assertEquals("it did not equal 5", "5", clickNumberButtonHelper(R.id.button5));
+        assertEquals("it did not equal 5", "5", clickButtonAndReadDisplay(R.id.button5));
     }
 
 
     public void testClickButton6ShouldAppendToDisplay() {
-        assertEquals("it did not equal 6", "6", clickNumberButtonHelper(R.id.button6));
+        assertEquals("it did not equal 6", "6", clickButtonAndReadDisplay(R.id.button6));
     }
 
 
     public void testClickButton7ShouldAppendToDisplay() {
-        assertEquals("it did not equal 7", "7", clickNumberButtonHelper(R.id.button7));
+        assertEquals("it did not equal 7", "7", clickButtonAndReadDisplay(R.id.button7));
     }
 
 
     public void testClickButton8ShouldAppendToDisplay() {
-        assertEquals("it did not equal 8", "8", clickNumberButtonHelper(R.id.button8));
+        assertEquals("it did not equal 8", "8", clickButtonAndReadDisplay(R.id.button8));
     }
 
 
     public void testClickButton9ShouldAppendToDisplay() {
-        assertEquals("it did not equal 9", "9", clickNumberButtonHelper(R.id.button9));
+        assertEquals("it did not equal 9", "9", clickButtonAndReadDisplay(R.id.button9));
     }
 
     public void testClickButton0ShouldAppendToDisplay() {
-        String display = clickNumberButtonHelper(R.id.button1);
-        assertEquals("it did not equal 10", "10", clickNumberButtonHelper(R.id.button0));
+        String display = clickButtonAndReadDisplay(R.id.button1);
+        assertEquals("it did not equal 10", "10", clickButtonAndReadDisplay(R.id.button0));
     }
 
     public void testClickButtonDecimalShouldAppendToDisplay() {
-        assertEquals("it did not equal .", ".", clickNumberButtonHelper(R.id.buttonDecimal));
+        assertEquals("it did not equal .", ".", clickButtonAndReadDisplay(R.id.buttonDecimal));
     }
 
 
-    private String clickNumberButtonHelper(int id) {
-        Button button = (Button) activity.findViewById(id);
-        TouchUtils.clickView(this, button);
-        TextView display = (TextView) activity.findViewById(R.id.display);
-        return display.getText().toString();
+    private String clickButtonAndReadDisplay(int id) {
+        helper.clickButton(id);
+        return helper.readText(R.id.display);
     }
 
     public void testClickClearButtonShouldClearTheDisplay() {
-        Button one = (Button) activity.findViewById(R.id.button1);
-        Button clear = (Button) activity.findViewById(R.id.clear_button);
-        TouchUtils.clickView(this, one);
-        TouchUtils.clickView(this, clear);
-
-        TextView display = (TextView) activity.findViewById(R.id.display);
-        String actualText = display.getText().toString();
-        assertEquals("0", actualText);
+        helper.clickButton(R.id.button1);
+        helper.clickButton(R.id.clear_button);
+        assertEquals("the clear button should reset the display to zero", "0", helper.readText(R.id.display));
     }
 
     public void testClickAdditionButton() {
-        clickAdditionButton();
-
-        TextView display = (TextView) activity.findViewById(R.id.display);
-        assertEquals("1", display.getText().toString());
+        addElevenPlusOne();
+        assertEquals("clicking a number after the addition button should display the number", "1", helper.readText(R.id.display));
     }
 
     public void testClickEqualsButton() {
-        clickAdditionButton();
-        TouchUtils.clickView(this, activity.findViewById(R.id.equals_button));
-        assertEquals("12", ((TextView) activity.findViewById(R.id.display)).getText().toString());
+        addElevenPlusOne();
+        helper.clickButton(R.id.equals_button);
+        assertEquals("eleven plus 1 should equal 12", "12", helper.readText(R.id.display));
     }
 
-    private void clickAdditionButton() {
-        Button one = (Button) activity.findViewById(R.id.button1);
-        TouchUtils.clickView(this, one);
-        TouchUtils.clickView(this, one);
-        Button plus = (Button) activity.findViewById(R.id.addition_button);
-        TouchUtils.clickView(this, plus);
-        TouchUtils.clickView(this, one);
+    private void addElevenPlusOne() {
+        helper.clickButton(R.id.button1, 2);
+        helper.clickButton(R.id.addition_button);
+        helper.clickButton(R.id.button1);
     }
 
-    private void clickAdditionWithDecimal() {
 
+    public void testClickSubtractionButton() {
+        helper.clickButton(R.id.button9);
+        helper.clickButton(R.id.subtraction_button);
+        helper.clickButton(R.id.button1);
+        helper.clickButton(R.id.equals_button);
+        assertEquals("9 minus 1 should display 8", "8", helper.readText(R.id.display));
     }
 
+
+    public void testClickSubtractButtonWithNegativeResult() {
+        helper.clickButton(R.id.button1);
+        helper.clickButton(R.id.subtraction_button);
+        helper.clickButton(R.id.button9);
+        helper.clickButton(R.id.equals_button);
+        assertEquals("1 minus 9 should display -8", "-8", helper.readText(R.id.display));
+    }
 
     @Override
     protected void tearDown() throws Exception {
