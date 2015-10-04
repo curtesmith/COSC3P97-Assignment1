@@ -15,12 +15,14 @@ public class CalculatorActivityTest extends ActivityInstrumentationTestCase2<Cal
         super(CalculatorActivity.class);
     }
 
+
     @Override
     protected void setUp() throws Exception {
         super.setUp();
         activity = getActivity();
         helper = new ActivityHelper(activity, this);
     }
+
 
     public void testDisplayIsThere() {
         TextView textView = (TextView) activity.findViewById(R.id.display);
@@ -63,6 +65,7 @@ public class CalculatorActivityTest extends ActivityInstrumentationTestCase2<Cal
     }
 
 
+
     public void testClickButton8ShouldAppendToDisplay() {
         assertEquals("it did not equal 8", "8", clickButtonAndReadDisplay(R.id.button8));
     }
@@ -72,10 +75,12 @@ public class CalculatorActivityTest extends ActivityInstrumentationTestCase2<Cal
         assertEquals("it did not equal 9", "9", clickButtonAndReadDisplay(R.id.button9));
     }
 
+
     public void testClickButton0ShouldAppendToDisplay() {
         String display = clickButtonAndReadDisplay(R.id.button1);
         assertEquals("it did not equal 10", "10", clickButtonAndReadDisplay(R.id.button0));
     }
+
 
     public void testClickButtonDecimalShouldAppendToDisplay() {
         assertEquals("it did not equal .", ".", clickButtonAndReadDisplay(R.id.buttonDecimal));
@@ -98,11 +103,13 @@ public class CalculatorActivityTest extends ActivityInstrumentationTestCase2<Cal
         assertEquals("clicking a number after the addition button should display the number", "1", helper.readText(R.id.display));
     }
 
+
     public void testClickEqualsButton() {
         addElevenPlusOne();
         helper.clickButton(R.id.equals_button);
         assertEquals("eleven plus 1 should equal 12", "12", helper.readText(R.id.display));
     }
+
 
     private void addElevenPlusOne() {
         helper.clickButton(R.id.button1, 2);
