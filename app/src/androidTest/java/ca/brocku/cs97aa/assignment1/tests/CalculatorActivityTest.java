@@ -135,6 +135,15 @@ public class CalculatorActivityTest extends ActivityInstrumentationTestCase2<Cal
         assertEquals("1 minus 9 should display -8", "-8", helper.readText(R.id.display));
     }
 
+
+    public void testClickMultiplicationButton() {
+        helper.clickButton(R.id.button3);
+        helper.clickButton(R.id.multiplication_button);
+        helper.clickButton(R.id.button4);
+        helper.clickButton(R.id.equals_button);
+        assertEquals("3 times 4 should display 12", "12", helper.readText(R.id.display));
+    }
+
     @Override
     protected void tearDown() throws Exception {
         super.tearDown();
