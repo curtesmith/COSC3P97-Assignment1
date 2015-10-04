@@ -76,6 +76,14 @@ public class CalculatorModelTest extends TestCase {
         assertEquals("it should display 12", "12", calculatorModel.getDisplay());
     }
 
+    public void testDivision() {
+        calculatorModel.appendToDisplay("11");
+        calculatorModel.division();
+        calculatorModel.appendToDisplay("4");
+        calculatorModel.calculate();
+        assertEquals("it should display 2.75", "2.75", calculatorModel.getDisplay());
+    }
+
     @Override
     protected void tearDown() throws Exception {
         super.tearDown();

@@ -70,6 +70,9 @@ public class CalculatorModel extends Observable {
     public void multiplication() { setOperation(new Multiplication()); }
 
 
+    public void division() { setOperation(new Division()); }
+
+
     private void setOperation(Operation operation) {
         calculate();
         setOperand(getDisplay());
