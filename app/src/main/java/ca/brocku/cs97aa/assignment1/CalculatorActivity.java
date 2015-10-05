@@ -5,13 +5,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.Observable;
 import java.util.Observer;
 
-public class CalculatorActivity extends Activity implements Observer, View.OnClickListener {
+public class CalculatorActivity extends Activity implements Observer, OnClickListener {
 
     private CalculatorModel calculatorModel;
 

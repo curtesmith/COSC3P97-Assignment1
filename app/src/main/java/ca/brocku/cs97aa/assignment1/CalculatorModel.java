@@ -5,62 +5,70 @@ import java.util.Observable;
 
 public class CalculatorModel extends Observable {
 
-    private String _display = "0";
-    private boolean _appendMode = false;
-    private Number _operand = null;
-    private Operation _operation = null;
+    private Display display;
+    private Number operand;
+    private Operation operation;
 
-    public CalculatorModel() { }
+    public CalculatorModel() {
+        setOperand(null);
+        setOperation(null);
+        display = new Display();
+    }
 
 
-    private void setOperand(String display) {
-        Double number = Double.valueOf(display);
+    private void setOperand(String operand) {
+        if (operand == null) {
+            this.operand = null;
+            return;
+        }
+
+        Double number = Double.valueOf(operand);
 
         if (isAnInteger(number)) {
-            _operand = number.intValue();
+            this.operand = number.intValue();
         } else {
-            _operand = number;
+            this.operand = number;
         }
     }
 
 
-    private boolean isAnInteger(Double number) {
+    private static boolean isAnInteger(Double number) {
         return number % 1 == 0;
     }
 
 
     public Number getOperand() {
-        return _operand;
+        return operand;
     }
 
 
     public void appendToDisplay(String text) {
-        if (_appendMode) {
-            setDisplay(getDisplay() + text);
-        } else {
-            _appendMode = true;
-            setDisplay(text);
-        }
+        appendToDisplay(text, false);
     }
 
 
-    private void setDisplay(String text) {
-        _display = text;
+    public void appendToDisplay(String text, boolean replaceText) {
+        if(replaceText) {
+            display.setText(text);
+            display.setAppendModeOff();
+        } else {
+            display.appendText(text);
+        }
+
         setChanged();
         notifyObservers();
     }
 
 
     public String getDisplay() {
-        return _display;
+        return display.getText();
     }
 
 
     public void clear() {
-        _appendMode = false;
-        _operand = null;
-        _operation = null;
-        setDisplay("0");
+        setOperand(null);
+        setOperation(null);
+        appendToDisplay("0", true);
     }
 
 
@@ -69,41 +77,56 @@ public class CalculatorModel extends Observable {
     }
 
 
-    public void subtraction() { setOperation(new Subtraction()); }
+    public void subtraction() {
+        setOperation(new Subtraction());
+    }
 
 
-    public void multiplication() { setOperation(new Multiplication()); }
+    public void multiplication() {
+        setOperation(new Multiplication());
+    }
 
 
-    public void division() { setOperation(new Division()); }
+    public void division() {
+        setOperation(new Division());
+    }
 
 
     private void setOperation(Operation operation) {
+        if (operation == null) {
+            this.operation = null;
+            return;
+        }
+
         calculate();
         setOperand(getDisplay());
-        _operation = operation;
-        _appendMode = false;
+        this.operation = operation;
+        display.setAppendModeOff();
+    }
+
+
+    private Operation getOperation() {
+        return operation;
     }
 
 
     public void calculate() {
         Number result;
 
-        if(_operation == null)
+        if(getOperation() == null) {
             return;
+        }
 
-        if (_operand == null) {
+        if (getOperand() == null) {
             setOperand(getDisplay());
             result = getOperand();
         } else {
-            Number savedOperand = getOperand();
+            Number firstOperand = getOperand();
             setOperand(getDisplay());
-
-            result = _operation.run(savedOperand, getOperand());
+            result = getOperation().run(firstOperand, getOperand());
         }
 
-        _appendMode = false;
         setOperand(result.toString());
-        setDisplay(result.toString());
+        appendToDisplay(result.toString(), true);
     }
 }
