@@ -83,7 +83,7 @@ public class CalculatorActivityTest extends ActivityInstrumentationTestCase2<Cal
 
 
     public void testClickButtonDecimalShouldAppendToDisplay() {
-        assertEquals("it did not equal .", ".", clickButtonAndReadDisplay(R.id.buttonDecimal));
+        assertEquals("it did not equal .", ".", clickButtonAndReadDisplay(R.id.decimal_button));
     }
 
 

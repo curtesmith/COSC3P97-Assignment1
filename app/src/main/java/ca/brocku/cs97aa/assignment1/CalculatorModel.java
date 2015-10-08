@@ -1,18 +1,26 @@
 package ca.brocku.cs97aa.assignment1;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Observable;
+import java.util.Observer;
 
 
-public class CalculatorModel extends Observable {
+public class CalculatorModel extends Observable implements Observer {
 
     private Display display;
     private Number operand;
     private Operation operation;
+    private String toastMessage;
+    private boolean displayHasChanged;
 
     public CalculatorModel() {
         setOperand(null);
         setOperation(null);
         display = new Display();
+        setMessage(null);
+        displayHasChanged = false;
+        display.addObserver(this);
     }
 
 
@@ -57,6 +65,25 @@ public class CalculatorModel extends Observable {
 
         setChanged();
         notifyObservers();
+    }
+
+
+    public void appendToDisplay(Number number, boolean replaceNumber) {
+        String text;
+
+        if (number.doubleValue() > 999999999) {
+            text = formatNumber(number);
+        } else {
+            text = number.toString();
+        }
+
+        appendToDisplay(text, replaceNumber);
+    }
+
+
+    private String formatNumber(Number number) {
+        NumberFormat formatter = new DecimalFormat("0.####E0");
+        return formatter.format(number.doubleValue());
     }
 
 
@@ -119,14 +146,41 @@ public class CalculatorModel extends Observable {
 
         if (getOperand() == null) {
             setOperand(getDisplay());
-            result = getOperand();
-        } else {
-            Number firstOperand = getOperand();
-            setOperand(getDisplay());
-            result = getOperation().run(firstOperand, getOperand());
+        } else if (displayHasChanged) {
+            try {
+                Number firstOperand = getOperand();
+                setOperand(getDisplay());
+                result = getOperation().run(firstOperand, getOperand());
+                setOperation(null);
+                setOperand(null);
+                appendToDisplay(result, true);
+                displayHasChanged = false;
+            } catch (Exception ex) {
+                setMessage(ex.getMessage());
+                setChanged();
+                notifyObservers();
+            }
         }
 
-        setOperand(result.toString());
-        appendToDisplay(result.toString(), true);
+
+    }
+
+
+    public String getMessage() {
+        return toastMessage;
+    }
+
+
+    public void setMessage(String message) {
+        if(message == null) {
+            toastMessage = null;
+        } else {
+            toastMessage = message;
+        }
+    }
+
+    @Override
+    public void update(Observable observable, Object data) {
+        displayHasChanged = true;
     }
 }

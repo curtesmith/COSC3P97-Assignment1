@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -34,7 +35,7 @@ public class CalculatorActivity extends Activity implements Observer, OnClickLis
         setOnClickButtonListener(R.id.button7);
         setOnClickButtonListener(R.id.button8);
         setOnClickButtonListener(R.id.button9);
-        setOnClickButtonListener(R.id.buttonDecimal);
+        setOnClickButtonListener(R.id.decimal_button);
         setOnClickButtonListener(R.id.clear_button);
         setOnClickButtonListener(R.id.addition_button);
         setOnClickButtonListener(R.id.subtraction_button);
@@ -74,7 +75,13 @@ public class CalculatorActivity extends Activity implements Observer, OnClickLis
     @Override
     public void update(Observable observable, Object data) {
         TextView display = (TextView) this.findViewById(R.id.display);
-        display.setText(calculatorModel.getDisplay());
+        CalculatorModel model = (CalculatorModel) observable;
+        display.setText(model.getDisplay());
+        if(model.getMessage() != null) {
+            Toast toast = Toast.makeText(getApplicationContext(), model.getMessage(), Toast.LENGTH_SHORT);
+            toast.show();
+            model.setMessage(null);
+        }
     }
 
 

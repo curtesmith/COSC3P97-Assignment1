@@ -1,7 +1,9 @@
 package ca.brocku.cs97aa.assignment1;
 
 
-public class Display {
+import java.util.Observable;
+
+public class Display extends Observable {
     private String text;
     private boolean appendModeOff;
 
@@ -23,6 +25,9 @@ public class Display {
         } else {
             setText(getText() + text);
         }
+
+        setChanged();
+        notifyObservers();
     }
 
 

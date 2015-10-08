@@ -16,7 +16,7 @@ public class SubrtactionTest extends TestCase{
 
 
     public void testRun() {
-        int result = (Integer) subtraction.run(3,1);
+        long result = (Long) subtraction.run(3,1);
         assertEquals("3 minus 1 did not equal 2", 2, result);
     }
 

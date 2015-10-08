@@ -17,12 +17,12 @@ public class MultiplicationTest extends TestCase {
 
 
     public void testRun() {
-        int result = (Integer) multiplication.run(3,4);
+        long result = (Long) multiplication.run(3,4);
         assertEquals("3 times 4 should equal 12", 12, result);
     }
 
     public void testRunWithOneNegativeOperand() {
-        int result = (Integer) multiplication.run(3,-4);
+        long result = (Long) multiplication.run(3,-4);
         assertEquals("3 times -4 should equal -12", -12, result);
     }
 

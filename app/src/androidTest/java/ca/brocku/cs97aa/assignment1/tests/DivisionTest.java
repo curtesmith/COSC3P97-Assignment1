@@ -16,15 +16,37 @@ public class DivisionTest extends TestCase {
 
 
     public void testRun() {
-        int result = (Integer) division.run(12,4);
-        assertEquals("12 divided by 4 should equal 3", 3, result);
+        try {
+            int result = (Integer) division.run(12, 4);
+            assertEquals("12 divided by 4 should equal 3", 3, result);
+        } catch (Exception ex) {
+            fail("an unexpected exception was thrown, message=[" + ex.getMessage() + "]");
+        }
     }
 
 
     public void testRunWithResultAsDecimal() {
-        double result = (Double) division.run(11, 4);
-        assertEquals("11 divided by 4 should equal 2.75", 2.75, result);
+        try {
+            double result = (Double) division.run(11, 4);
+            assertEquals("11 divided by 4 should equal 2.75", 2.75, result);
+        } catch (Exception ex) {
+
+            fail("an unexpected exception was thrown, message=[" + ex.getMessage() + "]");
+        }
     }
+
+
+    public void testRunWithDivisionByZero() {
+        String message = "";
+        try {
+            double result = (Double) division.run(11, 0);
+        } catch (Exception ex) {
+            message = ex.getMessage();
+        }
+
+        assertEquals("no exception was thrown", "Cannot divide by zero", message);
+    }
+
 
 
     @Override
