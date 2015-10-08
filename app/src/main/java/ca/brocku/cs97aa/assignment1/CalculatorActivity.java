@@ -32,16 +32,14 @@ public class CalculatorActivity extends Activity implements Observer, OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculator);
-
         calculatorModel = new CalculatorModel();
         calculatorModel.addObserver(this);
-
         setupOnClickListeners();
     }
 
 
     /**
-     * attach a listener to all button click events from the user interface
+     * Attach a listener to all button click events from the user interface
      */
     private void setupOnClickListeners() {
         setOnClickButtonListener(R.id.button0);
@@ -65,7 +63,7 @@ public class CalculatorActivity extends Activity implements Observer, OnClickLis
 
 
     /**
-     * attach a listener to the button identified by the buttonId parameter
+     * Attach a listener to the button identified by the buttonId parameter
      *
      * @param buttonId the id of the button that requires an onclick listener
      */
