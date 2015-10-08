@@ -22,9 +22,9 @@ public class AdditionTest extends TestCase {
 
 
     /**
-     * Test addition of the operands 1 and 2 which should equal 3.     *
+     * Test addition of the operands 1 and 2 which should equal 3.
      */
-    public void testRunWithOperands1and2WhichShouldEqual3() {
+    public void testRun() {
         assertEquals("The result was not 3", 3, (new Addition().run(1, 2)).intValue());
     }
 
