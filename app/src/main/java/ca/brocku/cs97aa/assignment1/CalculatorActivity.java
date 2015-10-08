@@ -2,8 +2,6 @@ package ca.brocku.cs97aa.assignment1;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -13,10 +11,23 @@ import android.widget.Toast;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * The main Android activity responsible for displaying the UI and handling the
+ * user interactions
+ */
 public class CalculatorActivity extends Activity implements Observer, OnClickListener {
 
     private CalculatorModel calculatorModel;
 
+    /**
+     * Called when the activity is starting and handles most of the setup instructions.
+     * This class implements uses an observer pattern to respond to changes when notified
+     * by the calculatorModel member. It also implements OnClickListener so that it can
+     * handle and respond to user events triggered by the user interface.
+     *
+     * @param savedInstanceState contains data that can be retrieved if the activity is
+     *                           being reintialized
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +36,14 @@ public class CalculatorActivity extends Activity implements Observer, OnClickLis
         calculatorModel = new CalculatorModel();
         calculatorModel.addObserver(this);
 
+        setupOnClickListeners();
+    }
+
+
+    /**
+     * attach a listener to all button click events from the user interface
+     */
+    private void setupOnClickListeners() {
         setOnClickButtonListener(R.id.button0);
         setOnClickButtonListener(R.id.button1);
         setOnClickButtonListener(R.id.button2);
@@ -45,33 +64,26 @@ public class CalculatorActivity extends Activity implements Observer, OnClickLis
     }
 
 
+    /**
+     * attach a listener to the button identified by the buttonId parameter
+     *
+     * @param buttonId the id of the button that requires an onclick listener
+     */
     private void setOnClickButtonListener(int buttonId) {
         Button button = (Button) this.findViewById(buttonId);
         button.setOnClickListener(this);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_calculator, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
+    /**
+     * Called when the calculatorModel notifies the activity/observer that its state has
+     * changed. When invoked the activity updates the display (TextView) with the display
+     * value stored in the model. It also checks if the model has any messages that
+     * should be displayed as a toast to the user.
+     *
+     * @param observable is the model being observed by the activity
+     * @param data is any data passed by the model being observed
+     */
     @Override
     public void update(Observable observable, Object data) {
         TextView display = (TextView) this.findViewById(R.id.display);
@@ -85,6 +97,14 @@ public class CalculatorActivity extends Activity implements Observer, OnClickLis
     }
 
 
+    /**
+     * onClick event handler that is set to be called when any of the buttons in the user
+     * interface are clicked. This method checks the source of the event by comparing the id
+     * of the button and then transferring control to the appropriate method of the
+     * calculatorModel member.
+     *
+     * @param v is the widget that was clicked
+     */
     @Override
     public void onClick(View v) {
         Button button = (Button) v;

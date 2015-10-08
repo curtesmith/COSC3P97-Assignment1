@@ -17,7 +17,7 @@ public class DivisionTest extends TestCase {
 
     public void testRun() {
         try {
-            int result = (Integer) division.run(12, 4);
+            long result = (Long) division.run(12, 4);
             assertEquals("12 divided by 4 should equal 3", 3, result);
         } catch (Exception ex) {
             fail("an unexpected exception was thrown, message=[" + ex.getMessage() + "]");
