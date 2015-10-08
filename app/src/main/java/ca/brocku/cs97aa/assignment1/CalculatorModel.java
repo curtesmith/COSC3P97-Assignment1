@@ -17,6 +17,7 @@ public class CalculatorModel extends Observable implements Observer {
     private Operation operation;
     private String toastMessage;
     private boolean displayHasChanged;
+    private boolean hasDecimal;
 
 
     /**
@@ -30,6 +31,7 @@ public class CalculatorModel extends Observable implements Observer {
         setMessage(null);
         displayHasChanged = false;
         display.addObserver(this);
+        hasDecimal = false;
     }
 
 
@@ -79,6 +81,17 @@ public class CalculatorModel extends Observable implements Observer {
         return operand;
     }
 
+
+    /**
+     * Append a decimal to the display text but if a decimal has already been
+     * appended to the display then do not allow a second decimal character to be added.
+     */
+    public void appendDecimal() {
+        if(!hasDecimal) {
+            appendToDisplay(".");
+            hasDecimal = true;
+        }
+    }
 
     /**
      * Append the text passed as an argument to the display text. This method
@@ -167,6 +180,7 @@ public class CalculatorModel extends Observable implements Observer {
         setOperand(null);
         setOperation(null);
         appendToDisplay("0", true);
+        hasDecimal = false;
     }
 
 
@@ -252,6 +266,7 @@ public class CalculatorModel extends Observable implements Observer {
                 setOperand(null);
                 appendToDisplay(result, true);
                 displayHasChanged = false;
+                hasDecimal = false;
             } catch (Exception ex) {
                 setMessage(ex.getMessage());
                 setChanged();

@@ -244,6 +244,15 @@ public class CalculatorActivityTest extends ActivityInstrumentationTestCase2<Cal
 
 
     /**
+     * Test that only one decimal is allowed.
+     */
+    public void testClickDecimalButtonTwiceShouldOnlyDisplayOneDecimal() {
+        helper.clickButton(R.id.decimal_button, 2);
+        assertEquals("there should only be one decimal", ".", helper.readText(R.id.display));
+    }
+
+
+    /**
      * Used to perform any activities that need to be done after each test.
      * @throws Exception
      */

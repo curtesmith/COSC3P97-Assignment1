@@ -126,6 +126,9 @@ public class CalculatorActivity extends Activity implements Observer, OnClickLis
             case R.id.equals_button:
                 calculatorModel.calculate();
                 break;
+            case R.id.decimal_button:
+                calculatorModel.appendDecimal();
+                break;
             default:
                 calculatorModel.appendToDisplay(button.getText().toString());
                 break;
