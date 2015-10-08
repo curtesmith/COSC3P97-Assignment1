@@ -7,7 +7,7 @@ package ca.brocku.cs97aa.assignment1;
 public class Addition extends Operation {
 
     /**
-     * Empty default constuctor
+     * Empty default constructor
      */
     public Addition() {}
 
