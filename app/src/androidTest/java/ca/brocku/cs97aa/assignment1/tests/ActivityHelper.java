@@ -18,16 +18,16 @@ public class ActivityHelper {
     }
 
 
-    public void clickButton(int id) {
-        clickButton(id, 1);
-    }
-
-
     public void clickButton(int id, int times) {
         Button button = (Button) activity.findViewById(id);
         for (int i = 0; i < times; i++) {
             TouchUtils.clickView(testCase, button);
         }
+    }
+
+
+    public void clickButton(int id) {
+        clickButton(id, 1);
     }
 
 
